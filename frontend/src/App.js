@@ -7,11 +7,13 @@ import SellerProfile from './components/SellerProfile';
 import ContactsList from './components/ContactsList';
 import OrdersPage from './components/OrdersPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import Header from './components/Header';
 import './App.css';
 
 function App() {
   return (
     <Router>
+      <Header />
       <div className="App">
         <Routes>
           <Route path="/login" element={<Login />} />
