@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import './Auth.css';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -12,8 +12,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Determine if identifier is email or phone number
+      const isEmail = identifier.includes('@');
+      
       const response = await axios.post('http://localhost:5000/api/auth/login', {
-        email,
+        [isEmail ? 'email' : 'phoneNumber']: identifier,
         password
       });
       
@@ -38,10 +41,10 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Email or Phone Number"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
               required
             />
           </div>
@@ -58,6 +61,9 @@ const Login = () => {
         </form>
         <p className="auth-link">
           Don't have an account? <Link to="/signup">Sign up</Link>
+        </p>
+        <p className="auth-link">
+          <Link to="/forgot-password">Forgot Password?</Link>
         </p>
       </div>
     </div>

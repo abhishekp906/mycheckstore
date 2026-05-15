@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Index from './components/Index';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import ForgotPassword from './components/ForgotPassword';
 import AdminPage from './components/AdminPage';
 import SellerProfile from './components/SellerProfile';
 import ContactsList from './components/ContactsList';
@@ -16,8 +18,10 @@ function App() {
       <Header />
       <div className="App">
         <Routes>
+          <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           
           <Route path="/admin" element={
             <ProtectedRoute requiredRole="admin">
@@ -42,8 +46,6 @@ function App() {
               <OrdersPage />
             </ProtectedRoute>
           } />
-          
-          <Route path="/" element={<Login />} />
         </Routes>
       </div>
     </Router>
